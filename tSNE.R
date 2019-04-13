@@ -34,7 +34,7 @@ head(pdat)
 ##----------Analysis with Seurat----------------------------------####
 
 ## Create Seurat Object ####
-sobjM <- CreateSeuratObject(raw.data = Malignant)
+sobjM <- CreateSeuratObject(raw.data = malignant)
 sobjN <- CreateSeuratObject(raw.data = nonMalignant)
 
 ## Expression QC - visualize and plot gene and molecular counts ####
