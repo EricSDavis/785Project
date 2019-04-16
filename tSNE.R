@@ -24,6 +24,9 @@ rownames(edat) <- fdat$genes
 malignant <- edat[,pdat$cellID[pdat$malignant == 2]]
 nonMalignant <- edat[,pdat$cellID[pdat$malignant != 2]]
 
+# does not include unresovled (0s)
+nonmalignant <- edat[,pdat$cellID[pdat$malignant == 1]]
+
 ## Take a look at the data ####
 dat[1:4, 1:4]
 edat[1:3, 1:3]
