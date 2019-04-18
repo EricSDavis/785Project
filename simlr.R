@@ -25,10 +25,10 @@ nmi_M300_large
 nmi_N300_large = compare(adjN300_data[,302], simlrN300_large$y$cluster, method="nmi")
 nmi_N300_large
 
-# confusion matrix of clustering
-table(simlrM300$y$cluster,adjM300_data[,301])
-table(simlrM300_large$y$cluster,adjM300_data[,301])
-table(simlrN300_large$y$cluster,adjN300_data[,302])
+# confusion matrix of clustering (unaligned)
+# table(simlrM300$y$cluster,adjM300_data[,301])
+# table(simlrM300_large$y$cluster,adjM300_data[,301])
+# table(simlrN300_large$y$cluster,adjN300_data[,302])
 
 # prepare data for plotting
 simlrM300_dat <- cbind.data.frame(simlrM300$ydata, simlrM300$y$cluster, adjM300_data[,301])
@@ -96,7 +96,8 @@ ggsave("simlrM300_large_cluster.jpg", path = "./plots/",
 
 # Non-Malignant colored by cell type (fast pca)
 ggplot(simlrN300_large_dat, aes(SIMLR1,SIMLR2,col=CellType))+geom_point()+blanktheme+
-  scale_color_manual(values=m.colors)+
+  scale_color_manual(values=m.colors,
+                     labels=c("T-cells", "B-cells", "Macrophages", "Endo.", "CAFs", "NK"))+
   ggtitle("SIMLR_Large_Scale Clustering of Non-Malignant Cells\nTop 300 Variable Genes\nColored by Cell Type")
 ggsave("simlrN300_large_celltype.jpg", path = "./plots/",
        width = 6, height = 4, units = "in")
