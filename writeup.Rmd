@@ -15,7 +15,7 @@ This project focuses on replicating aspects of the paper "Dissecting the multice
 The paper "used a multistep approach to distinguish the different cell types within melanoma tumors on the basis of both genetic and transcriptional states," which we attempted to replicate. For their first step and one of this project's tasks, large-scale copy number variations (CNVs) were inferred from expression profiles by averaging expression over stretches of 100 genes on their respective chromosomes. For the next task, the cells were grouped according to their expression profiles using t-SNE (nonlinear dimensionality reduction). In addition to t-SNE, we attempted dimensionality reduction using UMAP and clustering with SIMLR. The paper found that in general, "cells designated as malignant by CNV analysis formed a separate cluster for each tumor, suggesting a high degree of intertumor heterogeneity." The non-malignant cells, however, clustered by cell type and not by tumor or metastatic site. 
 
 # The Data
-We utilized the publicly available dataset GSE72056 containing 4645 single-cell RNA-seq profiles measured from malignant, immune, and stromal cells, isolated from 19 patients that span a range of clinical and therapeutic backgrounds. For the malignant cells, only tumors with >50 malignant cells were included. The paper included 6 tumors on this basis, but we found 8 tumors satisfying the condition. For the non-malignant cells, only tumors with >100 non-malignant cells were included. Using this criteria, the paper included 11 tumors while we included 12.
+We utilized the publicly available dataset GSE72056 containing 4645 single-cell RNA-seq profiles measured from malignant, immune, and stromal cells, isolated from 19 patients that span a range of clinical and therapeutic backgrounds. For the malignant cells, only tumors with >50 malignant cells were included. The paper included 6 tumors on this basis, but we found 8 tumors satisfying the condition, depending on ordering of filtering criteria. For the non-malignant cells, only tumors with >100 non-malignant cells were included. Using this criteria, the paper included 11 tumors in the main figure while we included 12.
 
 Before beginning the analysis, we used the *Seurat* package to perform quality checks on the data. The 'SCTransform' function scaled the residuals to have unit variance and centered the residuals to have mean zero. However, the data was already pre-processed and using centered and scaled data resulted in worse performance compared to using just centered data. 'SCTransform' was also used to find the top 300 and 3000 variable genes, used to subset the data is later analysis. As will be seen later, using data containing only the 300 most variable genes improved analysis compared to using only the 3000 most variable genes and also compared to using the complete data.
 
@@ -30,6 +30,35 @@ For the first task, we attempted to replicate the following plots using various 
 ### t-SNE
 (description of t-SNE and explain results )
 (insert Eric's t-SNE plots)
+
+These steps can be condensed into a single function:
+
+```{r, eval=FALSE}
+## For Convenience these steps can be condensed into a single function ####
+run_seurat <- function(exprsMatrix){
+  ## Create Seurat Object ####
+  sobj <- CreateSeuratObject(raw.data = exprsMatrix)
+  ## Normalization ####
+  sobj <- NormalizeData(sobj, normalization.method = 'LogNormalize', scale.factor = 10000)
+  ## Finding Highly Variable Genes ###
+  sobj <- FindVariableGenes(sobj,
+                            mean.function = ExpMean,
+                            dispersion.function = LogVMR,
+                            x.low.cutoff = 0.0125,
+                            x.high.cutoff = 3,
+                            y.cutoff = 0.5)
+  ## Scaling data to regress out confounders (detected molecules per cell) ####
+  sobj <- ScaleData(sobj, vars.to.regress = c('nUMI'))
+  ## Dimensionality Reduction ####
+  sobj <- RunPCA(sobj, pc.genes = sobj@var.genes, do.print = T, pcs.print = 1:5, genes.print = 5)
+  ## Clustering and tSNE Plot ####
+  sobj <- FindClusters(sobj, reduction.type = "pca", dims.use = 1:8, resolution = 1.0, print.output = 0, save.SNN = T)
+  sobj <- RunTSNE(sobj, dims.use = 1:8)
+  TSNEPlot(sobj)
+  return(sobj)
+}
+```
+
 
 ### UMAP
 Uniform Manifold Approximation and Project (*UMAP*) is a novel manifold learning technique for dimension reduction competitive with *t-SNE* for data visualization. Before running *UMAP*, linear dimensional reduction (principal components analysis) was performed. Then UMAP was run on both the untransformed complete data, and on the centered data containing only the 300 and 3000 most highly variable genes. In the UMAP plots below, it can be seen that the malignant cells cluster by tumor origin. In all three cases, distinct clustering can be seen, although in varying degrees. Arguably, *t-SNE* performs the best in terms of creating distinct separation between clusters. In the *t-SNE* plot, the non-malignant cells appeared to cluster by cell-type. This is somewhat the case for UMAP run on the centered data using the top 300 most variable genes. However, the T cells form two separate clusters, while some of the other cell-types are lost within the T cells. For UMAP run on the complete data and on the top 3000 most variable genes, one does not observe clustering by cell-type. Clustering by tumor is not apparent either.
