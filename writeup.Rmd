@@ -24,8 +24,8 @@ Before beginning the analysis, we used the *Seurat* package to perform quality c
 # Task 1
 For the first task, we attempted to replicate the following plots using various visualization and clustering methods. Malignant and non-malignant cell-types were distinguished using single-cell expression profiles. Clusters of non-malignant cells are marking by dashed ellipses and were annotated as T cells, B cells, macrophages, endothelial cells, cancer-associated fibroblasts, and natural killer cells.
 
-![](project/plots/paper_malignant.png){width=250px}
-![](project/plots/paper_nonmalignant.png){width=305px}
+![](./plots/paper_malignant.png){width=250px}
+![](./plots/paper_nonmalignant.png){width=305px}
 
 ### t-SNE
 (description of t-SNE and explain results )
@@ -34,35 +34,35 @@ For the first task, we attempted to replicate the following plots using various 
 ### UMAP
 Uniform Manifold Approximation and Project (*UMAP*) is a novel manifold learning technique for dimension reduction competitive with *t-SNE* for data visualization. Before running *UMAP*, linear dimensional reduction (principal components analysis) was performed. Then UMAP was run on both the untransformed complete data, and on the centered data containing only the 300 and 3000 most highly variable genes. In the UMAP plots below, it can be seen that the malignant cells cluster by tumor origin. In all three cases, distinct clustering can be seen, although in varying degrees. Arguably, *t-SNE* performs the best in terms of creating distinct separation between clusters. In the *t-SNE* plot, the non-malignant cells appeared to cluster by cell-type. This is somewhat the case for UMAP run on the centered data using the top 300 most variable genes. However, the T cells form two separate clusters, while some of the other cell-types are lost within the T cells. For UMAP run on the complete data and on the top 3000 most variable genes, one does not observe clustering by cell-type. Clustering by tumor is not apparent either.
 
-![](project/plots/malignant_unadj.jpg){width=400px}
-![](project/plots/malignant3000.jpg){width=400px}
-![](project/plots/malignant300.jpg){width=400px}
+![](./plots/malignant_unadj.jpg){width=400px}
+![](./plots/malignant3000.jpg){width=400px}
+![](./plots/malignant300.jpg){width=400px}
 
 
 
-![](project/plots/nonmalignant3000_celltype.jpg){width=400px}
-![](project/plots/nonmalignant3000_tumor.jpg){width=400px}
+![](./plots/nonmalignant3000_celltype.jpg){width=400px}
+![](./plots/nonmalignant3000_tumor.jpg){width=400px}
 
-![](project/plots/nonmalignant300_celltype.jpg){width=400px}
-![](project/plots/nonmalignant300_tumor.jpg){width=400px}
+![](./plots/nonmalignant300_celltype.jpg){width=400px}
+![](./plots/nonmalignant300_tumor.jpg){width=400px}
 
-![](project/plots/nonmalignant_unadj_celltype.jpg){width=400px}
-![](project/plots/nonmalignant_unadj_tumor.jpg){width=400px}
+![](./plots/nonmalignant_unadj_celltype.jpg){width=400px}
+![](./plots/nonmalignant_unadj_tumor.jpg){width=400px}
 
 ### SIMLR
 Single-cell Interpretaion via Multi-kernal LeaRning (*SIMLR*) is a similarity-learning frameowrk that learns an appropriate distance metric from the data for purposes of dimension reduction, clustering, and visualization. *SIMLR* and *SIMLR* large scale was run on the transformed data using only the 300 most variable genes. The normalized mutual information (NMI) was computed between the clusters inferred by *SIMLR* large scale and the ground truth clusters. NMI scores range from 0 and 1, with higher values reflecting better performance. Again, in the *t-SNE* plots, malignant cells cluster by tumor origin. The same is true for clusters identified by *SIMLR*. The clusters found by *SIMLR* (NMI=0.6077) are well-separated but a few tumors were clustered together, as can be seen below. *SIMLR* large scale performed much better than *SIMLR* (NMI=0.8518) in clustering the malignant cells. *SIMLR* had the worst performance in clustering the non-malignant cells (NMI=0.5708). As in *UMAP*, *SIMLR* created two clusters for T cells while other cell-types were lost within the T cells. There is some clustering by cell-type, but it is not as apparent as in the *t-SNE* plots, and clustering by tumor is not apparent either.
 
 
-![](project/plots/simlrM300_cluster.jpg){width=400px}
-![](project/plots/simlrM300_tumor.jpg){width=400px}
+![](./plots/simlrM300_cluster.jpg){width=400px}
+![](./plots/simlrM300_tumor.jpg){width=400px}
 
-![](project/plots/simlrM300_large_cluster.jpg){width=400px}
-![](project/plots/simlrM300_large_tumor.jpg){width=400px}
+![](./plots/simlrM300_large_cluster.jpg){width=400px}
+![](./plots/simlrM300_large_tumor.jpg){width=400px}
 
-![](project/plots/simlrN300_large_cluster.jpg){width=400px}
-![](project/plots/simlrN300_large_tumor.jpg){width=400px}
+![](./plots/simlrN300_large_cluster.jpg){width=400px}
+![](./plots/simlrN300_large_tumor.jpg){width=400px}
 
-![](project/plots/simlrN300_large_celltype.jpg){width=400px}
+![](./plots/simlrN300_large_celltype.jpg){width=400px}
 
 # Task 2
 For the second task, we attempted to replicate the following plot using *inferCNV*.
