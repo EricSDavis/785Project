@@ -65,17 +65,20 @@ Single-cell Interpretaion via Multi-kernal LeaRning (*SIMLR*) is a similarity-le
 ![](./plots/simlrN300_large_celltype.jpg){width=400px}
 
 # Task 2
-For the second task, we attempted to replicate the following plot using *inferCNV*.
-Copy number variations (CNVs) are genomic alterations, with abnormal deletions or amplifications of one or more gens on segments of chromosomes.
+For the second task, we attempted to replicate the following plot using *InferCNV*.
 
-A heatmap is generated directly from the *inferCNV*, illustrating the relative expression intensities across each chromosome. From the plot, it’s apparent to see which regions of the tumor genome are over-abundant or less-abundant as compared to that of non-malignant cells.
+Copy number variations (CNVs) are genomic alterations, with abnormal deletions or amplifications of one or more gens on segments of chromosomes. And InferCNV is applied to explore the tumor single cell RNA-seq data, detect chromosomal copy number alterations and identify deletions or amplifications of malignant cell gene expression by comparing it to a set of non-malignant cells.
 
-Use non-malignant cells as reference cells:
+A heatmap is generated directly from the *InferCNV*, illustrating the relative expression intensities across each chromosome. From the plot, it’s apparent to see which regions of the tumor genome are over-abundant or less-abundant as compared to that of non-malignant cells.
+
+Advanced application of *InferCNV* also includes methods to predict CNA regions and define cell subclusters according to patterns of heterogeneity, and you can run it step by step for more exploratory purposes, which is not included in this report. Here we just use the standard pipeline to replicate the figure in paper and compare the results. 
+
+Use non-malignant cells as reference cells for Mel80:
 
 ![](./plots/infercnv_plot_80.png){width=400px}
 
 
-If we do not indicate reference cell, the average signal across all cells will be used to define the baseline:
+If we do not indicate reference cells, the average signal across all cells will be used to define the baseline:
 
 ![](./plots/infercnv_plot_80NULL.png){width=400px}
 
