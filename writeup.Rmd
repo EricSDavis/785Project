@@ -95,8 +95,25 @@ Single-cell Interpretaion via Multi-kernal LeaRning (*SIMLR*) is a similarity-le
 
 # Task 2
 For the second task, we attempted to replicate the following plot using *inferCNV*.
+Copy number variations (CNVs) are genomic alterations, with abnormal deletions or amplifications of one or more gens on segments of chromosomes.
 
-(insert inferCNV plots)
+A heatmap is generated directly from the *inferCNV*, illustrating the relative expression intensities across each chromosome. From the plot, it’s apparent to see which regions of the tumor genome are over-abundant or less-abundant as compared to that of non-malignant cells.
+
+Use non-malignant cells as reference cells:
+
+![](./plots/infercnv_plot_80.png){width=400px}
+
+
+If we do not indicate reference cell, the average signal across all cells will be used to define the baseline:
+
+![](./plots/infercnv_plot_80NULL.png){width=400px}
+
+
+We also try to plot heatmap for Mel78 as showed in supplementary materials:
+
+
+![](./plots/infercnv_plot_78final.png){width=400px}
+
 Plot caption: Chromosomal landscape of inferred large-scale CNVs allows us to distingush malignant from non-malignant cells. The Mel80 tumor is shown with individual cells (y axis) and chromosomal regions (x axis). Amplifications (red) or deletions (blue) were inferred by averaging expression over 100-gene stretches on the respective chromosomes. Inferred CNVs are concordant with calls from WES.
 
 # Discussion
