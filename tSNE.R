@@ -297,6 +297,7 @@ nk_sig <- sapply(1:ncol(temp), function(x) temp[which(fdat$genes %in% markers$nk
 cd8T_sig <- sapply(1:ncol(temp), function(x) temp[which(fdat$genes %in% markers$cd8T),x] %>% mean)
 temp <- rbind(temp, tcell_sig, bcell_sig, macro_sig, endo_sig, caf_sig, nk_sig, cd8T_sig)
 rownames(temp)[nrow(temp)]
+
 ## Run tSNE Pipeline ####
 temp_obj <- run_seurat(temp)
 
