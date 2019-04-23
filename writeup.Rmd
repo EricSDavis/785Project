@@ -22,6 +22,7 @@ Before beginning the analysis, we used the *Seurat* package to perform quality c
 (insert more about data here)
 
 # Task 1
+
 For the first task, we attempted to replicate the following plot using *InferCNV*, which is aimed at inferring the copy number variarions from tumor single cell RNA-seq data. In addition, we use six tumors as they choose in tSNE plot in this paper, and put their *InferCNV* results together to see if there are any common alterations.
 
 ![](./plots/paper_reference1.png){width=400px}
@@ -30,32 +31,31 @@ For the first task, we attempted to replicate the following plot using *InferCNV
 
 Copy number variations (CNVs) are genomic alterations, with abnormal deletions or amplifications of one or more gens on segments of chromosomes. And *InferCNV* is applied to explore the tumor single cell RNA-seq data, detect chromosomal copy number alterations and identify deletions or amplifications of malignant cell gene expression by comparing it to a set of non-malignant cells.
 
-A heatmap is generated directly from the *InferCNV*, illustrating the relative expression intensities across each chromosome. From the plot, it’s apparent to see which regions of the tumor genome are over-abundant or less-abundant as compared to that of non-malignant cells.
+A heatmap is generated directly from the *InferCNV* for each run, illustrating the relative expression intensities across each chromosome. From the plot, it’s apparent to see which regions of the tumor genome are over-abundant or less-abundant as compared to that of non-malignant cells.
 
 Advanced application of *InferCNV* also includes methods to predict CNA regions and define cell subclusters according to patterns of heterogeneity, and you can run it step by step for more exploratory purposes, which is not included in this report. Here we just use the standard pipeline to replicate the figures in paper and compare the results. 
 
-Plot caption:  Selected tumor cells are shown below with individual cells (y axis) and chromosomal regions (x axis). Amplifications (red) or deletions (blue) were inferred by averaging expression over 100-gene stretches on the respective chromosomes. 
+Plot caption:  Selected tumor cells are shown below with individual cells (y axis) and chromosomal regions (x axis). Amplifications (red) or deletions (blue) are inferred by averaging expression over 100-gene stretches on the respective chromosomes. 
 
 Use non-malignant cells as reference cells for Mel80:
 
 ![](./plots/infercnv_plot_80.png){width=400px}
 
-Mel80 *InferCNV* plot shows strong amplifications at chromosome 1,2,3, 7,8,15,19, 20,21,22. It also shows large deletions at chromosome 4,6,9,10,14,19. Most of the figures recapitulate the results as shown in the paper and are also consistent with the whole exon sequencing data. There is some discrepancy between our plot and the plot in the paper regarding copy number variations on chromosome 8 and 22.
-
-Our data shows some amplification on chromosome 22. According to literature, there are some gene loci including the region where EP300 gene is located on chromosome 22 often shows amplification in RAS mutant tumors. Mel 80 has NRAS Q61L mutation. This observation suggests our result could be real. There might be some error during WES or in the analysis of the paper.
+Mel80 *InferCNV* plot shows strong amplifications at chromosome 1, 2, 3, 7, 8, 15, 19, 20, 21 and 22. It shows large deletions at chromosome 4, 6, 9, 10, 14 and 19. Most of the figures recapitulate the results as shown in the paper and are also consistent with the whole exon sequencing data. There is some discrepancy between our plot and the plot in the paper regarding copy number variations on chromosome 8 and 22. Our data shows some amplification on chromosome 22. According to literature, there are some gene loci including the region where EP300 gene is located on chromosome 22 often shows amplification in RAS mutant tumors. Mel 80 has NRAS Q61L mutation. This observation suggests our result could be real. There might be some error during WES or in the analysis of the paper. To address the concern regarding the differential results, it would be very informative to compare our result with the TCGA melanoma CNV data[1].
 
 
 We also try to plot heatmap for Mel78 (also non-malignant cells as reference):
 
 ![](./plots/infercnv_plot_78final.png){width=400px}
 
-Mel78 *InferCNV* plot shows almost identical result as shown in the supplementary materials of the paper and is also consistent with the whole exon sequencing data. It shows strong amplification at chromosome 1,2,3,10,11,14,21 and deletions at chromosome 3,4,5,6,11,12,13,17,18,19, X. However, the deletion region at the end of chromosome 19 might be assigned to Chromosome 20 in the paper, which might be a labelling mistake.
+As shown above, we get almost identical result as shown in the supplementary materials of the paper and it is also consistent with the whole exon sequencing data. It shows strong amplification at chromosome 1, 2, 3, 10, 11, 14, 21 and 22. It shows deletions at chromosome 3, 4, 5, 6, 11, 12, 13, 17, 18, 19 and X. 
 
-Comparing the *InferCNV* plot of Mel 78 and 80, we found that they share some common copy number variations. For example, they both have amplification on chromosome 1,2,3,7,19,21,22 and deletions on chromosome 4,5,6, 19, X. This might because both of them are RAS mutant tumors.
+Comparing the *InferCNV* plot of Mel 78 and 80, we find that they share some common copy number variations. For example, they both have amplification on chromosome 1, 2, 3, 7, 19, 21 and 22, and deletions on chromosome 4, 5, 6, 19 and X. This might because both of them are RAS mutant tumors.
 
 
-Overall, we analyzed 6 tumors by *InferCNV*. As shown below, 5 out of the 6 tumors belong to 3 genomic subtypes of melanoma. The subtype of one tumor (Mel 89) is not identified. Compare the results of 6 tumors, we can see obvious intertumoral heterogeneity. Each tumor has its own copy number variations. However, we can also see similarities shared among different tumors, especially the ones that have the same subtype. For example, Mel 78 and Mel 80 shared lots of common copy number alterations. 
-By clustering all the 6 tumors together, we can also identify some amplifications and/or deletions common to all of the tumors, suggesting these regions might play a very important role in the progression of melanoma. Further detailed study of these regions could identify potential oncogenes or tumor suppressor genes involved in the development of melanoma.
+Overall, we analyzed 6 tumors by *InferCNV*. As shown below, 5 out of the 6 tumors belong to 3 genomic subtypes of melanoma. Mel80, 78 and 88 all belong to RAS mutant subtype. Mel 81 has BRAF mutation. Mel 79 is wildtype. The subtype of Mel 89 is not identified. Comparing the results of 6 tumors, we can see obvious intertumoral heterogeneity, that each tumor has its own copy number variations. However, we can also see similarities shared among different tumors, especially the ones that have the same subtype. For example, Mel78, Mel 80 and Mel 88 all have amplification of chromosome 22, further supporting our earlier analysis done for Mel 80 is true.
+
+By clustering all the 6 tumors together, we can identify some amplifications and/or deletions common to all of the tumors, such as amplifications at chromosome 1-3, deep deletions at chromosome 6 and 10, suggesting these regions might play a very important role in the progression of melanoma. MITF, a master regulator of melanocyte and also an oncogene is located at chromosome 3. The well-known tumor suppressor gene PTEN is located at chromosome 10. Further detailed study of these commonly and /or differentially altered genomic regions could identify potential oncogenes or tumor suppressor genes involved in the development of melanoma and give guidance to targeted therapies or immune therapies.
 
 ![](./plots/comparison.png){width=400px}
 
@@ -359,7 +359,7 @@ Single-cell Interpretaion via Multi-kernal LeaRning (*SIMLR*) is a similarity-le
 
 
 # References
-
+[1] Genomic Classification of Cutaneous Melanoma. Cell. 2015 Jun 18;161(7):1681-96.
 
 
 
