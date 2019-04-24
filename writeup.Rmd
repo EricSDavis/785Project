@@ -19,7 +19,6 @@ We utilized the publicly available dataset GSE72056 containing 4645 single-cell 
 
 Before beginning the analysis, we used the *Seurat* package to perform quality checks on the data. The 'SCTransform' function scaled the residuals to have unit variance and centered the residuals to have mean zero. However, the data was already pre-processed and using centered and scaled data resulted in worse performance compared to using just centered data. 'SCTransform' was also used to find the top 300 and 3000 variable genes, used to subset the data is later analysis. As will be seen later, using data containing only the 300 most variable genes improved analysis compared to using only the 3000 most variable genes and also compared to using the complete data.
 
-(insert more about data here)
 
 # Task 1
 
@@ -68,8 +67,6 @@ For the second task, we attempted to replicate the following plots using various
 ![](./plots/paper_nonmalignant.png){width=305px}
 
 ### t-SNE
-(description of t-SNE and explain results )
-(insert Eric's t-SNE plots)
 
 T-distributed Stochastic Neighbor Embedding (t-SNE) is a nonlinear dimensionality reduction technique used for visualizing high-dimensional data such as a single-cell gene expression data into low dimensional space. t-SNE allows us to visualize the relationships between cells based on their ensemble gene expression profiles.
 
@@ -324,7 +321,7 @@ p <- FeaturePlot(temp_obj, c("tcell_sig", "bcell_sig", "macro_sig", "endo_sig", 
 
 
 ### UMAP
-Uniform Manifold Approximation and Project (*UMAP*) is a novel manifold learning technique for dimension reduction competitive with *t-SNE* for data visualization. Before running *UMAP*, linear dimensional reduction (principal components analysis) was performed. Then UMAP was run on both the untransformed complete data, and on the centered data containing only the 300 and 3000 most highly variable genes. In the UMAP plots below, it can be seen that the malignant cells cluster by tumor origin. In all three cases, distinct clustering can be seen, although in varying degrees. Arguably, *t-SNE* performs the best in terms of creating distinct separation between clusters. In the *t-SNE* plot, the non-malignant cells appeared to cluster by cell-type. This is somewhat the case for UMAP run on the centered data using the top 300 most variable genes. However, the T cells form two separate clusters, while some of the other cell-types are lost within the T cells. For UMAP run on the complete data and on the top 3000 most variable genes, one does not observe clustering by cell-type. Clustering by tumor is not apparent either.
+Uniform Manifold Approximation and Project (*UMAP*) is a novel manifold learning technique for dimension reduction competitive with *t-SNE* for data visualization. Before running *UMAP*, linear dimensional reduction (principal components analysis) was performed. Then UMAP was run on both the untransformed complete data, and on the centered data containing only the 300 and 3000 most highly variable genes. The untransformed complete data plot demonstrates the importance of QC. The trasnformed and filtered data was performed using the Seurat pipeline. In the UMAP plots below, it can be seen that the malignant cells cluster by tumor origin. In all three cases, distinct clustering can be seen, although in varying degrees. Arguably, *t-SNE* performs the best in terms of creating distinct separation between clusters. In the *t-SNE* plot, the non-malignant cells appeared to cluster by cell-type. This is somewhat the case for UMAP run on the centered data using the top 300 most variable genes. However, the T cells form two separate clusters, while some of the other cell-types are lost within the T cells. The separatation of T cells into two clusters is supported by the feature plots shown previously. For UMAP run on the complete data and on the top 3000 most variable genes, one does not observe clustering by cell-type. Clustering by tumor is not apparent either.
 
 ![](./plots/malignant_unadj.jpg){width=400px}
 ![](./plots/malignant3000.jpg){width=400px}
@@ -342,7 +339,7 @@ Uniform Manifold Approximation and Project (*UMAP*) is a novel manifold learning
 ![](./plots/nonmalignant_unadj_tumor.jpg){width=400px}
 
 ### SIMLR
-Single-cell Interpretaion via Multi-kernal LeaRning (*SIMLR*) is a similarity-learning frameowrk that learns an appropriate distance metric from the data for purposes of dimension reduction, clustering, and visualization. *SIMLR* and *SIMLR* large scale was run on the transformed data using only the 300 most variable genes. The normalized mutual information (NMI) was computed between the clusters inferred by *SIMLR* large scale and the ground truth clusters. NMI scores range from 0 and 1, with higher values reflecting better performance. Again, in the *t-SNE* plots, malignant cells cluster by tumor origin. The same is true for clusters identified by *SIMLR*. The clusters found by *SIMLR* (NMI=0.6077) are well-separated but a few tumors were clustered together, as can be seen below. *SIMLR* large scale performed much better than *SIMLR* (NMI=0.8518) in clustering the malignant cells. *SIMLR* had the worst performance in clustering the non-malignant cells (NMI=0.5708). As in *UMAP*, *SIMLR* created two clusters for T cells while other cell-types were lost within the T cells. There is some clustering by cell-type, but it is not as apparent as in the *t-SNE* plots, and clustering by tumor is not apparent either.
+Single-cell Interpretaion via Multi-kernal LeaRning (*SIMLR*) is a similarity-learning frameowrk that learns an appropriate distance metric from the data for purposes of dimension reduction, clustering, and visualization. *SIMLR* and *SIMLR* large scale was run on the transformed data using only the 300 most variable genes. *SIMLR* took approximately 16 minutes to run on the malignant cells, where as *SIMLR* large scale only took less than 5 seconds to run. The normalized mutual information (NMI) was computed between the clusters inferred by *SIMLR* large scale and the ground truth clusters. NMI scores range from 0 and 1, with higher values reflecting better performance. Again, in the *t-SNE* plots, malignant cells cluster by tumor origin. The same is true for clusters identified by *SIMLR*. The clusters found by *SIMLR* (NMI=0.6077) are well-separated but a few tumors were clustered together, as can be seen below. *SIMLR* large scale performed much better than *SIMLR* (NMI=0.8518) in clustering the malignant cells. *SIMLR* had the worst performance in clustering the non-malignant cells (NMI=0.5708). As in *UMAP*, *SIMLR* created two clusters for T cells while other cell-types were lost within the T cells. There is some clustering by cell-type, but it is not as apparent as in the *t-SNE* plots, and clustering by tumor is not apparent either.
 
 
 ![](./plots/simlrM300_cluster.jpg){width=400px}
