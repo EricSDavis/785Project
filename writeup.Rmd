@@ -22,7 +22,7 @@ Before beginning the analysis, we used the *Seurat* package to perform quality c
 
 # Task 1
 
-For the first task, we attempted to replicate the following plot using *InferCNV*, which is aimed at inferring the copy number variarions from tumor single cell RNA-seq data. In addition, we use six tumors as they choose in tSNE plot in this paper, and put their *InferCNV* results together to see if there are any common alterations.
+For the first task, we attempted to replicate the following plot using *InferCNV* (inferCNV of the Trinity CTAT Project.  https://github.com/broadinstitute/inferCNV), which is aimed at inferring the copy number variarions from tumor single cell RNA-seq data. In addition, we use six tumors as they choose in tSNE plot in this paper, and put their *InferCNV* results together to see if there are any common alterations.
 
 ![](./plots/paper_reference1.png){width=600px}
 
