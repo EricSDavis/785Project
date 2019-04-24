@@ -24,9 +24,9 @@ Before beginning the analysis, we used the *Seurat* package to perform quality c
 
 For the first task, we attempted to replicate the following plot using *InferCNV*, which is aimed at inferring the copy number variarions from tumor single cell RNA-seq data. In addition, we use six tumors as they choose in tSNE plot in this paper, and put their *InferCNV* results together to see if there are any common alterations.
 
-![](./plots/paper_reference1.png){width=400px}
+![](./plots/paper_reference1.png){width=600px}
 
-![](./plots/paper_reference2.png){width=400px}
+![](./plots/paper_reference2.png){width=600px}
 
 Copy number variations (CNVs) are genomic alterations, with abnormal deletions or amplifications of one or more gens on segments of chromosomes. And *InferCNV* is applied to explore the tumor single cell RNA-seq data, detect chromosomal copy number alterations and identify deletions or amplifications of malignant cell gene expression by comparing it to a set of non-malignant cells.
 
@@ -38,14 +38,14 @@ Plot caption:  Selected tumor cells are shown below with individual cells (y axi
 
 Use non-malignant cells as reference cells for Mel80:
 
-![](./plots/infercnv_plot_80.png){width=400px}
+![](./plots/infercnv_plot_80.png){width=600px}
 
 Mel80 *InferCNV* plot shows strong amplifications at chromosome 1, 2, 3, 7, 8, 15, 19, 20, 21 and 22. It shows large deletions at chromosome 4, 6, 9, 10, 14 and 19. Most of the figures recapitulate the results as shown in the paper and are also consistent with the whole exon sequencing data. There is some discrepancy between our plot and the plot in the paper regarding copy number variations on chromosome 8 and 22. Our data shows some amplification on chromosome 22. According to literature, there are some gene loci including the region where EP300 gene is located on chromosome 22 often shows amplification in RAS mutant tumors. Mel 80 has NRAS Q61L mutation. This observation suggests our result could be real. There might be some error during WES or in the analysis of the paper. To address the concern regarding the differential results, it would be very informative to compare our result with the TCGA melanoma CNV data[1].
 
 
 We also try to plot heatmap for Mel78 (also non-malignant cells as reference):
 
-![](./plots/infercnv_plot_78final.png){width=400px}
+![](./plots/infercnv_plot_78final.png){width=600px}
 
 As shown above, we get almost identical result as shown in the supplementary materials of the paper and it is also consistent with the whole exon sequencing data. It shows strong amplification at chromosome 1, 2, 3, 10, 11, 14, 21 and 22. It shows deletions at chromosome 3, 4, 5, 6, 11, 12, 13, 17, 18, 19 and X. 
 
@@ -56,7 +56,7 @@ Overall, we analyzed 6 tumors by *InferCNV*. As shown below, 5 out of the 6 tumo
 
 By clustering all the 6 tumors together, we can identify some amplifications and/or deletions common to all of the tumors, such as amplifications at chromosome 1-3, deep deletions at chromosome 6 and 10, suggesting these regions might play a very important role in the progression of melanoma. MITF, a master regulator of melanocyte and also an oncogene is located at chromosome 3. The well-known tumor suppressor gene PTEN is located at chromosome 10. Further detailed study of these commonly and /or differentially altered genomic regions could identify potential oncogenes or tumor suppressor genes involved in the development of melanoma and give guidance to targeted therapies or immune therapies.
 
-![](./plots/comparison.png){width=400px}
+![](./plots/comparison.png){width=600px}
 
 
 
