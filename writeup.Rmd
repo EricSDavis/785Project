@@ -1,7 +1,7 @@
 ---
 title: "BIOS 785: Final Paper"
 author: "Eric Davis, Taylor Lagler, Ling Cai, Yue Pan, Paloma Hauser"
-date: "4/16/2019"
+date: "4/25/2019"
 output: html_document
 ---
 
@@ -385,7 +385,11 @@ http://doi.org/10.12688/f1000research.9501.2).
 [10] Erich Neuwirth (2014). RColorBrewer: ColorBrewer Palettes. R package version 1.1-2.
   https://CRAN.R-project.org/package=RColorBrewer
 
+[11] Tomasz Konopka (2018). umap: Uniform Manifold Approximation and Projection. R pacakge version 0.2.0.0. https://CRAN.R-project.org/package=umap
 
+[12] Daniele Ramazzotti, Bo Wang and Luca De Sano (2019). SIMLR: Single-cell Interpretation via Multi-kernel LeaRning (SIMLR). R package version 1.8.1. https://github.com/BatzoglouLabSU/SIMLR
+
+[13] Stuart and Butler et al. Comprehensive integration of single cell data. bioRxiv (2018).
 
 
 
